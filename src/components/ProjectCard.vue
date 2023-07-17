@@ -1,57 +1,63 @@
 <script>
 import axios from 'axios';
 
-export default{
+export default {
     name: "ProjectCard",
-    data(){
-        return{
+    data() {
+        return {
             chiave: "valore",
             apiUrl: "http://localhost:8000/api/",
             loading: false,
             loadingError: false,
-            projects:[],
+            projects: [],
         }
     },
-    methods:{
-        getProjects(){
+    methods: {
+        getProjects() {
             this.loading = true;
-            axios.get(this.apiUrl + "projects" ).then( (response) => {
+            axios.get(this.apiUrl + "projects").then((response) => {
                 this.projects = response.data.results;
                 this.loading = false;
                 console.log(response.data.results);
-            }).catch(err=>{
+            }).catch(err => {
                 this.loading = false;
                 this.loadingError = "Errore nel caricamento dei dati";
             });
         }
 
     },
-    mounted(){
+    mounted() {
         this.getProjects();
     }
 }
 </script>
 
 <template>
-    <h2>Città visitate</h2>
-    <h6 v-if="loading">Cari camento in corso</h6>
-    <h6 v-if="loadingError">{{this.loadingError}}</h6>
+    <div class="container">
+        <div class="row">
+            <h2>Città visitate</h2>
+            <h6 v-if="loading">Caricamento in corso</h6>
+            <h6 v-if="loadingError">{{ this.loadingError }}</h6>
 
-    <div v-for="project in projects">
-        <h2>{{ project.title }}</h2>
-        <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
-        <ul>
-            <li v-for="tech in project.technology">
-                {{ tech.name }}
-            </li>
-        </ul>
-        <p>{{ project.description}}</p>
-        <a :href="project.link">link wikipedia</a>
+            <div class="col-12 d-flex flex-wrap justify-content-start">
+                <div class="card" v-for="project in projects" style="width: 18rem;">
+                    <h2>{{ project.title }}</h2>
+                    <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="tech in project.technology">
+                            {{ tech.name }}
+                        </li>
+                    </ul>
+                    <p class="my-3">{{ project.description }}</p>
+                    <a class="btn btn-primary" :href="project.link">Wikipedia</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
-div{
+div.card {
     background-color: #eb3e1b;
     padding: 1rem;
     margin: 2rem;
@@ -59,9 +65,8 @@ div{
     color: white;
 }
 
-a{
+a {
     text-decoration: none;
     color: #4d3347;
 }
-
 </style>

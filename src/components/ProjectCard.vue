@@ -35,12 +35,14 @@ export default {
 <template>
     <div class="container">
         <div class="row">
-            <h2>Città visitate</h2>
-            <h6 v-if="loading">Caricamento in corso</h6>
-            <h6 v-if="loadingError">{{ this.loadingError }}</h6>
+            <div class="col-12 p-3 d-flex justify-content-center">
+                <h2 class="text-white">Città visitate</h2>
+                <h6 v-if="loading">Caricamento in corso</h6>
+                <h6 v-if="loadingError">{{ this.loadingError }}</h6>
+            </div>
 
             <div class="col-12 d-flex flex-wrap justify-content-start">
-                <div class="card" v-for="project in projects" style="width: 18rem;">
+                <div class="card" v-for="project in projects" style="width: 30rem;">
                     <h2>{{ project.title }}</h2>
                     <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
                     <ul class="list-group">

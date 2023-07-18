@@ -1,21 +1,24 @@
 <script>
-import ProjectCard from './components/ProjectCard.vue';
+import AppHeader from './components/AppHeader.vue';
 
 export default{
   data(){
     return{
     }
-  },
-  components:{
-    ProjectCard,
+  },components:{
+    AppHeader
   }
 }
 </script>
 
 <template>
-<main>
-  <ProjectCard />
-</main>
+
+<header>
+  <AppHeader />
+</header>
+
+<router-view></router-view>
+
 </template>
 
 <style scoped>

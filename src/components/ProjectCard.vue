@@ -41,9 +41,10 @@ export default {
                 <h6 v-if="loadingError">{{ this.loadingError }}</h6>
             </div>
 
-            <div class="col-12 d-flex flex-wrap justify-content-start">
-                <div class="card" v-for="project in projects" style="width: 30rem;">
+            <div class="col-12 d-flex flex-wrap justify-content-center">
+                <div class="card text-white p-3 m-3 rounded-3" v-for="project in projects" style="width: 30rem;">
                     <h2>{{ project.title }}</h2>
+                    <img :src="project.thumb" :alt="project.title">
                     <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
                     <ul class="list-group">
                         <li class="list-group-item" v-for="tech in project.technology">
@@ -51,7 +52,7 @@ export default {
                         </li>
                     </ul>
                     <p class="my-3">{{ project.description }}</p>
-                    <a class="btn btn-primary" :href="project.link">Wikipedia</a>
+                    <a class="btn text-white text-decoration-none" :href="project.link">Wikipedia</a>
                 </div>
             </div>
         </div>
@@ -60,15 +61,15 @@ export default {
 
 <style scoped>
 div.card {
-    background-color: #eb3e1b;
-    padding: 1rem;
-    margin: 2rem;
-    border-radius: 2rem;
-    color: white;
+    background-color: #cadec8;
 }
 
-a {
-    text-decoration: none;
-    color: #4d3347;
+.btn{
+    background-color: #3e7e55;
+}
+
+li{
+    background-color: #eaeee5;
+    color: #3e7e55;
 }
 </style>

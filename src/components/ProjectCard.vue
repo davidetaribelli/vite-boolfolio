@@ -5,8 +5,7 @@ export default {
     name: "ProjectCard",
     data() {
         return {
-            chiave: "valore",
-            apiUrl: "http://localhost:8000/api/",
+            apiUrl: "http://localhost:8003/api/",
             loading: false,
             loadingError: false,
             projects: [],
@@ -19,7 +18,6 @@ export default {
         axios.get(this.apiUrl + "projects").then((response) => {
             this.projects = response.data.results;
             this.loading = false;
-            console.log(response.data.results);
         }).catch(err => {
             this.loading = false;
             this.loadingError = "Errore nel caricamento dei dati";
@@ -38,22 +36,16 @@ export default {
         <div class="row">
             <!-- utilizzo il caricamento in corso nel caso di errori -->
             <div class="col-12 p-3 d-flex justify-content-center">
-                <h2 class="text-white">Città visitate</h2>
+                <h2 class="text-white">Luoghi visitati</h2>
                 <h6 v-if="loading">Caricamento in corso</h6>
                 <h6 v-if="loadingError">{{ this.loadingError }}</h6>
             </div>
             <!-- stampo nella pagina utilizzando i metodi di vue -->
             <div class="col-12 d-flex flex-wrap justify-content-center">
-                <div class="card text-white p-3 m-3 rounded-3" v-for="project in projects" style="width: 30rem;">
-                    <h2>{{ project.title }}</h2>
+                <div class="card p-3 m-3 rounded-3" v-for="project in projects">
+                    <h2 class="c_green">{{ project.title }}</h2>
                     <img :src=" 'http://127.0.0.1:8003/storage/' + project.thumb" :alt="project.title">
-                    <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item" v-for="tech in project.technology">
-                            {{ tech.name }}
-                        </li>
-                    </ul>
-                    <p class="my-3">{{ project.description }}</p>
+                    <router-link class="btn text-white text-decoration-none my-3" :to="{ name:'single-project', params: {id: project.id}}">{{ project.title }}</router-link>
                     <a class="btn text-white text-decoration-none" :href="project.link">Wikipedia</a>
                 </div>
             </div>
@@ -64,6 +56,12 @@ export default {
 <style scoped>
 div.card {
     background-color: #cadec8;
+}
+
+img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 .btn {

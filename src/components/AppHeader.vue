@@ -8,6 +8,8 @@ export default {
             navLinks: [
                 { label: "Home", name: "home" },
                 { label: "Projects", name: "projects" },
+                
+
             ]
         }
     },

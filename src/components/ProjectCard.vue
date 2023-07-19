@@ -13,17 +13,18 @@ export default {
         }
     },
     methods: {
-        getProjects() {
-            this.loading = true;
-            axios.get(this.apiUrl + "projects").then((response) => {
-                this.projects = response.data.results;
-                this.loading = false;
-                console.log(response.data.results);
-            }).catch(err => {
-                this.loading = false;
-                this.loadingError = "Errore nel caricamento dei dati";
-            });
-        }
+    //metodo per utilizzare axios
+    getProjects() {
+        this.loading = true;
+        axios.get(this.apiUrl + "projects").then((response) => {
+            this.projects = response.data.results;
+            this.loading = false;
+            console.log(response.data.results);
+        }).catch(err => {
+            this.loading = false;
+            this.loadingError = "Errore nel caricamento dei dati";
+        });
+    }
 
     },
     mounted() {
@@ -35,16 +36,17 @@ export default {
 <template>
     <div class="container">
         <div class="row">
+            <!-- utilizzo il caricamento in corso nel caso di errori -->
             <div class="col-12 p-3 d-flex justify-content-center">
                 <h2 class="text-white">Città visitate</h2>
                 <h6 v-if="loading">Caricamento in corso</h6>
                 <h6 v-if="loadingError">{{ this.loadingError }}</h6>
             </div>
-
+            <!-- stampo nella pagina utilizzando i metodi di vue -->
             <div class="col-12 d-flex flex-wrap justify-content-center">
                 <div class="card text-white p-3 m-3 rounded-3" v-for="project in projects" style="width: 30rem;">
                     <h2>{{ project.title }}</h2>
-                    <img :src="project.thumb" :alt="project.title">
+                    <img :src=" 'http://127.0.0.1:8003/storage/' + project.thumb" :alt="project.title">
                     <h3>{{ project.type ? project.type.travel : "Nessuno" }}</h3>
                     <ul class="list-group">
                         <li class="list-group-item" v-for="tech in project.technology">
@@ -64,11 +66,11 @@ div.card {
     background-color: #cadec8;
 }
 
-.btn{
+.btn {
     background-color: #3e7e55;
 }
 
-li{
+li {
     background-color: #eaeee5;
     color: #3e7e55;
 }

@@ -14,9 +14,10 @@ export default{
 <template>
 
 <header>
+  <!-- importo AppHeader -->
   <AppHeader />
 </header>
-
+<!-- rotte -->
 <router-view></router-view>
 
 </template>

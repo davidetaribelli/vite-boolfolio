@@ -16,6 +16,7 @@ export default {
 
 <template>
     <main>
+        <!-- importo il file ProjectCard -->
         <ProjectCard />
     </main>
 </template>

@@ -5,7 +5,10 @@ export default {
     name: "AppHeader",
     data() {
         return {
-
+            navLinks: [
+                { label: "Home", name: "home" },
+                { label: "Projects", name: "projects" },
+            ]
         }
     },
 }
@@ -13,18 +16,9 @@ export default {
 
 <template>
     <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <router-link class="navbar-brand" :to="{name: 'home'}">Boolfolio</router-link>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link class="nav-link active" :to="{name: 'projects'}">Projects</router-link>
-                    </li>
-                </ul>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" v-for="i in navLinks">
+                <router-link class="nav-link" :to="{ name: i.name }">{{ i.label }}</router-link>
             </div>
         </div>
     </nav>
